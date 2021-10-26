@@ -1,0 +1,35 @@
+pragma solidity ^0.8.9;
+
+contract creatorBalanceChecker {
+
+    address creator;
+    uint creatorbalance; 		// TIP: uint is an alias for uint256. Ditto int and int256.
+
+    constructor () 
+    {
+        creator = msg.sender; 								 // msg.sender is current address
+        
+    }
+
+	function getContractAddress() view public returns (address) 
+	{
+		return address(this);
+	}
+
+	function getContractBalance() view public returns (uint)     // Will return the conract's balance 
+	{
+        return address(this).balance;
+    }
+    
+    function getCreatorDotBalance() view public returns (uint)  // Will return creator's balance NOW
+    {
+        return creator.balance;
+    }
+    
+    function transferBalanceToContract(uint _amount)  public {
+        
+        payable(creator).transfer(_amount);
+    } 
+    
+ 
+}
