@@ -31,5 +31,10 @@ contract creatorBalanceChecker {
         payable(creator).transfer(_amount);
     } 
     
+    function getCreator() view public returns(address){
+        
+        return creator ; 
+    } 
+    
  
 }
