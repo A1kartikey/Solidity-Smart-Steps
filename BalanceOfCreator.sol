@@ -1,27 +1,27 @@
-pragma solidity ^0.4.19;
+pragma solidity ^0.8.9;
 
 contract creatorBalanceChecker {
 
     address creator;
     uint creatorbalance; 		// TIP: uint is an alias for uint256. Ditto int and int256.
 
-    function creatorBalanceChecker() public 
+    constructor()
     {
         creator = msg.sender; 								 // msg.sender is current address
         creatorbalance = creator.balance;
     }
 
-	function getContractAddress() constant returns (address) 
+	function getContractAddress() view public returns (address) 
 	{
-		return this;
+		return  address(this);
 	}
 
-	function getCreatorBalance() constant returns (uint)     // Will return the creator's balance AT THE TIME THIS CONTRACT WAS CREATED
+	function getCreatorBalance() view public returns (uint)     // Will return the creator's balance AT THE TIME THIS CONTRACT WAS CREATED
 	{
         return creatorbalance;
     }
     
-    function getCreatorDotBalance() constant returns (uint)  // Will return creator's balance NOW
+    function getCreatorDotBalance() view public returns (uint)  // Will return creator's balance NOW
     {
         return creator.balance;
     }
@@ -30,10 +30,10 @@ contract creatorBalanceChecker {
      Standard kill() function to recover funds 
      **********/
     
-    function kill()
+    function selfDestruct() public
     { 
         if (msg.sender == creator)
-            suicide(creator);  // kills this contract and sends remaining funds back to creator
+            selfdestruct (payable(creator));  // kills this contract and sends remaining funds back to creator
     }
         
 }
