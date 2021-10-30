@@ -1,5 +1,5 @@
 pragma experimental ABIEncoderV2;//This is Experimental features.Can not be used in production cases.
-pragma solidity ^0.5.7;
+pragma solidity ^0.8.9;
 
 contract stringComparision {
     
